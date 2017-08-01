@@ -1,0 +1,7 @@
+﻿  stdafx.cpp
+  link_list.c
+d:\hansdata\01_a\02_t\1\link_list\link_list\link_list.c(62): warning C4244: '=': 將 'double' 轉換為 'float'，由於類型不同，可能導致資料遺失
+d:\hansdata\01_a\02_t\1\link_list\link_list\link_list.c(60): warning C4305: '正在初始化': 從 'double' 轉換為 'float'，是由較大的類型轉換為較小的類型，可能導致資料遺失
+link_list.obj : warning LNK4075: 忽略 '/EDITANDCONTINUE'，由於 '/SAFESEH' 規格
+  link_list.vcxproj -> D:\HansData\01_A\02_T\1\link_list\Debug\link_list.exe
+  link_list.vcxproj -> D:\HansData\01_A\02_T\1\link_list\Debug\link_list.pdb (Full PDB)
