@@ -1,0 +1,402 @@
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0
+Value = 0
+Right, R:0, G:0 B:0

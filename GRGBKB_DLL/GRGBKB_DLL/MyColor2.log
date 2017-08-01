@@ -1,0 +1,57 @@
+CheckRGBDevice GRGBDLL_GetMEKBTYPE ==> 2
+GRGBDLL_InitialDLL Finished
+CheckRGBDevice Finished
+InitializeParameter Finished
+InitializeComponent Finished
+SetLanguageDictionary Finished
+GRGBDLL_Capture4ZONEBuffer Mode:0 EEffect:1 light:50 Speed:5 direction0
+CheckRGBDevice GRGBDLL_GetMEKBTYPE ==> 2
+GRGBDLL_InitialDLL Finished
+CheckRGBDevice Finished
+InitializeParameter Finished
+InitializeComponent Finished
+SetLanguageDictionary Finished
+GRGBDLL_Capture4ZONEBuffer Mode:0 EEffect:1 light:50 Speed:5 direction0
+CheckRGBDevice GRGBDLL_GetMEKBTYPE ==> 0
+USB_DEVICE_NOTCONNECTED
+GRGBDLL_InitialDLL Finished
+LoadLibrary audiostealer.dll Finished
+CheckRGBDevice Finished
+InitializeParameter Finished
+InitializeComponent Finished
+SetLanguageDictionary Finished
+GetOemServicePowerStatus
+Close Audio Stealer
+InitializeLayout Finished
+Close Audio Stealer
+Close Audio Stealer
+Close Audio Stealer
+CheckRGBDevice GRGBDLL_GetMEKBTYPE ==> 1
+GRGBDLL_InitialDLL Finished
+LoadLibrary audiostealer.dll Finished
+CheckRGBDevice Finished
+InitializeParameter Finished
+InitializeComponent Finished
+SetLanguageDictionary Finished
+GetOemServicePowerStatus
+Close Audio Stealer
+InitializeLayout Finished
+Close Audio Stealer
+Close Audio Stealer
+Close Audio Stealer
+CheckRGBDevice GRGBDLL_GetMEKBTYPE ==> 1
+GRGBDLL_InitialDLL Finished
+LoadLibrary audiostealer.dll Finished
+CheckRGBDevice Finished
+InitializeParameter Finished
+InitializeComponent Finished
+SetLanguageDictionary Finished
+GetOemServiceEffectStatus
+GetOemServicePowerStatus
+Close Audio Stealer
+InitializeLayout Finished
+Close Audio Stealer
+Close Audio Stealer
+Close Audio Stealer
+Close Audio Stealer
+Close Audio Stealer

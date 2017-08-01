@@ -1,0 +1,11 @@
+﻿  stdafx.cpp
+  dllmain.cpp
+  GRGBKB_DLL.cpp
+     正在建立程式庫 D:\HansData\01_A\01_F\01_C#\01_RGB_KB_UI\20170727_MyColor2\x64\Release\GRGBKB_DLL.lib 和物件 D:\HansData\01_A\01_F\01_C#\01_RGB_KB_UI\20170727_MyColor2\x64\Release\GRGBKB_DLL.exp
+  正在產生程式碼
+  43 of 45 functions (95.6%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    0 functions had inline decision re-evaluated but remain unchanged
+  已完成程式碼產生
+  GRGBKB_DLL.vcxproj -> D:\HansData\01_A\01_F\01_C#\01_RGB_KB_UI\20170727_MyColor2\x64\Release\GRGBKB_DLL.dll
+  GRGBKB_DLL.vcxproj -> D:\HansData\01_A\01_F\01_C#\01_RGB_KB_UI\20170727_MyColor2\x64\Release\GRGBKB_DLL.pdb (Full PDB)

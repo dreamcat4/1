@@ -1,0 +1,523 @@
+#include "audiostealer.h"
+//
+BOOL      _fIsStop   = TRUE;
+//
+const CLSID CLSID_MMDeviceEnumerator    = __uuidof(MMDeviceEnumerator);
+const IID IID_IMMDeviceEnumerator       = __uuidof(IMMDeviceEnumerator);
+const IID IID_IAudioClient              = __uuidof(IAudioClient);
+const IID IID_IAudioCaptureClient       = __uuidof(IAudioCaptureClient);
+//
+static FFTransform*  _pFFTrans          = NULL;
+static FFTransform*  _pFFTransStereo    = NULL;
+static SampleIter*   _pSampleIter       = NULL;
+//
+static BOOL          _fUsedHID = FALSE;
+static BOOL          _fTimer    = FALSE;
+static SHORT         _nDevCount = 0;
+//
+HINSTANCE            _hInstance = 0;
+HHOOK                _hHook     = 0;
+//
+BOOL _DEBUG_ENABLE = FALSE;
+//
+FLOAT FastSqrt(FLOAT x)
+{ 
+    FLOAT xhalf = 0.5f*x;
+    INT   i     = *(PINT)&x;
+//
+    i = 0x5f375a84 - (i >> 1);
+    x = *(FLOAT*)&i;
+//
+    x = x*(1.5f - xhalf * x * x);
+    return 1.0f / x;
+};
+//
+VOID FreeResource(VOID)
+{
+    if (_pFFTrans != NULL)
+    {
+        delete _pFFTrans;
+    };
+     _pFFTrans = NULL;
+//
+    if (_pFFTransStereo != NULL)
+    {
+        delete _pFFTransStereo;
+    };
+    _pFFTransStereo = NULL;
+//
+    if (_pSampleIter != NULL)
+    {
+        delete _pSampleIter;
+    };
+    _pSampleIter = NULL;
+};
+//
+VOID CALLBACK DevChangeTimerProc(_In_ HWND     hwnd,
+                                 _In_ UINT     uMsg,
+                                 _In_ UINT_PTR idEvent,
+                                 _In_ DWORD    dwTime)
+{
+    _fIsStop = TRUE;
+    FreeResource();
+    _nDevCount++;
+    printf("Process Timer Event(DevChange).\n");
+    if (_nDevCount >= 3)
+    {
+        _fIsStop = FALSE;
+        _fTimer  = FALSE;
+        KillTimer((HWND)GetModuleHandle(0), 1001);
+        HANDLE hThread = ::CreateThread(NULL, 0, AudioThreadProc, NULL, 0, NULL);
+        if (hThread)
+            CloseHandle(hThread);
+    };
+};
+//
+DWORD WINAPI AudioThreadProc(_In_ LPVOID lpParameter)
+{
+    if (_fIsStop == FALSE)
+        StealAudioStream();
+    return 0;
+};
+//
+BOOL 
+FixedWaveformTo16Bits(WAVEFORMATEX *pwfx)
+{
+    if(pwfx->wFormatTag == WAVE_FORMAT_IEEE_FLOAT)
+        pwfx->wFormatTag = WAVE_FORMAT_PCM;
+    else if(pwfx->wFormatTag == WAVE_FORMAT_EXTENSIBLE)
+    {
+        PWAVEFORMATEXTENSIBLE pEx = reinterpret_cast<PWAVEFORMATEXTENSIBLE>(pwfx);
+        if (IsEqualGUID(KSDATAFORMAT_SUBTYPE_IEEE_FLOAT, pEx->SubFormat))
+        {
+            pEx->SubFormat = KSDATAFORMAT_SUBTYPE_PCM;
+            pEx->Samples.wValidBitsPerSample = 16;
+        };
+    }
+    else
+        return FALSE;
+        
+    pwfx->wBitsPerSample  = 16;
+    pwfx->nBlockAlign     = pwfx->nChannels * pwfx->wBitsPerSample / 8;
+    pwfx->nAvgBytesPerSec = pwfx->nBlockAlign * pwfx->nSamplesPerSec;
+    return TRUE;
+};
+//
+HRESULT StealAudioStream(VOID)
+{
+    HRESULT        hr;
+    UINT           bufferFrameCount;
+    UINT           numFramesAvailable;
+    PBYTE          pData;
+    DWORD          flags;
+    REFERENCE_TIME hnsDefaultDevicePeriod;
+
+    IMMDeviceEnumerator    *pEnumerator             = NULL;
+    IMMDevice              *pDevice                 = NULL;
+    IAudioClient           *pAudioClient            = NULL;
+    IAudioCaptureClient    *pCaptureClient          = NULL;
+    WAVEFORMATEX           *pwfx                    = NULL;
+    UINT                    packetLength            = 0;
+    HANDLE                  hTimerWakeUp            = NULL;
+    HANDLE                  waitArray[1]            = {hTimerWakeUp};
+    SHORT                   limit[6] = {0};
+    DOUBLE                  sum_count = 0.0;
+    LARGE_INTEGER           liFirstFire;
+    LONG                    lTimeBetweenFires;
+    SHORT                   index;
+//
+#if _DEBUG_ENABLE
+    printf("\nEnter StealAudioStream.\n");
+#endif
+//
+    hr = CoInitialize(NULL);
+//
+    hnsDefaultDevicePeriod = 0;
+    hr = CoCreateInstance(CLSID_MMDeviceEnumerator, NULL, CLSCTX_ALL, IID_IMMDeviceEnumerator, (PVOID*)&pEnumerator);
+    EXIT_ON_ERROR(hr)
+//
+    hr = pEnumerator->GetDefaultAudioEndpoint(eRender, eConsole, &pDevice);
+    EXIT_ON_ERROR(hr)
+//
+    hr = pDevice->Activate(IID_IAudioClient, CLSCTX_ALL, NULL, (PVOID*)&pAudioClient);
+    EXIT_ON_ERROR(hr)
+//
+    hr = pAudioClient->GetDevicePeriod(&hnsDefaultDevicePeriod, NULL);
+//
+    hr = pAudioClient->GetMixFormat(&pwfx);
+    EXIT_ON_ERROR(hr)
+//
+    if (FixedWaveformTo16Bits(pwfx) == FALSE)
+        return E_FAIL;
+//
+    hTimerWakeUp = ::CreateWaitableTimer(NULL, FALSE, NULL);
+
+    hr = pAudioClient->Initialize(AUDCLNT_SHAREMODE_SHARED, AUDCLNT_STREAMFLAGS_LOOPBACK, 0, 0, pwfx, NULL);
+    EXIT_ON_ERROR(hr)
+//
+    hr = pAudioClient->GetBufferSize(&bufferFrameCount);
+    EXIT_ON_ERROR(hr)
+//
+    hr = pAudioClient->GetService(IID_IAudioCaptureClient, (void**)&pCaptureClient);
+    EXIT_ON_ERROR(hr)
+
+    liFirstFire.QuadPart = -hnsDefaultDevicePeriod / 2;
+    lTimeBetweenFires    = (LONG)hnsDefaultDevicePeriod / 2 / (10 * 1000);
+    ::SetWaitableTimer(hTimerWakeUp, &liFirstFire, lTimeBetweenFires, NULL, NULL, FALSE);
+//
+#if _DEBUG_ENABLE
+    {
+        WCHAR buf[20] = {0};
+//
+        StringCbPrintfW(buf, 10, L"0x%X", pwfx->wFormatTag);
+        wprintf(buf);
+        StringCbPrintfW(buf, 10, L"0x%X", pwfx->nChannels);
+        wprintf(buf);
+        StringCbPrintfW(buf, 10, L"0x%X", pwfx->nSamplesPerSec);
+        wprintf(buf);
+        StringCbPrintfW(buf, 10, L"0x%X", pwfx->nAvgBytesPerSec);
+        wprintf(buf);
+        StringCbPrintfW(buf, 10, L"0x%X", pwfx->nBlockAlign);
+        wprintf(buf);
+        StringCbPrintfW(buf, 10, L"0x%X", pwfx->wBitsPerSample);
+        wprintf(buf);
+    };
+#endif
+//
+    _pFFTrans          = new FFTransform(pwfx->nSamplesPerSec, AUDIO_BUFFER_SIZE / (pwfx->nChannels * (pwfx->wBitsPerSample/8)));
+    _pFFTransStereo    = new FFTransform(pwfx->nSamplesPerSec, AUDIO_BUFFER_SIZE / (pwfx->wBitsPerSample/8));
+    _pSampleIter       = new SampleIter();
+//
+    hr = pAudioClient->Start();
+    EXIT_ON_ERROR(hr)
+//
+    index = 0;
+    while (_fIsStop == FALSE)
+    {
+        WaitForMultipleObjects(sizeof(waitArray) / sizeof(waitArray[0]), waitArray, FALSE, INFINITE);
+//
+        hr = pCaptureClient->GetNextPacketSize(&packetLength);
+        EXIT_ON_ERROR(hr)
+//
+        while (packetLength != 0 && _fIsStop == FALSE)
+        {
+            hr = pCaptureClient->GetBuffer(&pData, &numFramesAvailable, &flags, NULL, NULL);
+            EXIT_ON_ERROR(hr)
+//
+#if _DEBUG_ENABLE
+            printf("Process Audio Data.\n");
+#endif
+//
+#if 1
+            UINT  idx       = 0;
+            INT   sampleCnt = numFramesAvailable;
+            INT  lm = 0, rm = 0, maxLeft = 0, maxRight = 0;
+//
+            for (idx = 0; idx < numFramesAvailable  && _fIsStop == FALSE; idx += 2)
+            {
+                ULONG  data_low  = pData[idx];
+                ULONG  data_high = pData[idx + 1];
+                DOUBLE data_true = data_high * 256 + data_low;
+                LONG   data_complement = 0;     
+                INT    my_sign = (INT)(data_high / 128);
+//
+                if (my_sign == 1)
+                {
+                    data_complement = (LONG)(data_true - 65536);
+                }
+                else
+                {
+                   data_complement = (LONG)data_true;
+                };
+                sum_count = (DOUBLE)(data_complement / (DOUBLE)32768.0);
+            };
+#endif
+//
+            if (_pSampleIter->SetSampleWorkSet((PCHAR)pData, numFramesAvailable,  pwfx->wBitsPerSample / 8, TRUE))
+            {
+                static INT  channels[2][SPECSCOPEWIDTH] = { { 0, 0, 0, 0 }, 
+                                                            { 0, 0, 0, 0 } };
+                WorkChannel channelWork[2]             = { WRKCHANNEL_LEFT, WRKCHANNEL_RIGHT};
+//
+                INT chan;
+                INT swap1[3] = {0};
+                INT swap2[3] = {0};
+                INT maxFreq;
+                INT freqChg;
+                INT freqAccum[SPECSCOPEWIDTH];
+//
+                for (chan = 0; chan < 2; chan++)
+                {
+                    FFTransform* pFFT = _pFFTrans;
+//
+                    _pSampleIter->SetPos(0);
+                    _pSampleIter->SetWorkChannel(channelWork[chan]);
+                    _pFFTrans->fftTransformMag(*_pSampleIter, TRUE);
+                    maxFreq = (_pSampleIter->Count() / 2);
+                    freqChg = maxFreq / (SPECSCOPEWIDTH + 1);
+//
+                    INT    idx;
+                    INT    freqIdx    = -2;
+                    INT    freqCnt    = 0;
+                    INT    accumlator = 0;
+                    FLOAT* pMags      = _pFFTrans->fftGetMagArray();
+//
+                    RtlZeroMemory(freqAccum, sizeof (freqAccum));
+                    for (idx = 0; idx < maxFreq; idx++)
+                    {
+                        if (pMags[idx] > accumlator)
+                            accumlator = (INT)pMags[idx];
+//
+                        freqCnt++;
+                        if (freqCnt > freqChg)
+                        {
+                            freqCnt = 0;
+                            freqIdx++;
+//
+                            if (freqIdx >= 0)
+                                freqAccum[freqIdx] = accumlator;
+//
+                            accumlator = 0;
+                        };
+                    };
+//
+                    if (freqIdx < (SPECSCOPEWIDTH + 1))
+                    {
+                        freqIdx++;
+                        freqAccum[freqIdx] = accumlator;
+                    };
+//
+                    if (chan == 0)
+                    {
+                        INT  data  = 0;
+//
+                        for (idx = 0; idx < SPECSCOPEWIDTH; idx++)
+                        {
+                            if (freqAccum[idx] >= channels[chan][idx])
+                                channels[0][idx] = freqAccum[idx];
+                            else
+                            {
+                                channels[0][idx] -= 128;
+                                if (channels[0][idx] < 0)
+                                    channels[0][idx] = 0;
+                            };
+//
+                            if (channels[0][idx] == 0 || channels[0][idx] <= 16)
+                            {
+                                swap1[idx] = 0;
+                            }
+                            else
+                            {
+                                data = channels[0][idx] / 16;
+                                if (data >= 256)
+                                {
+                                    data = 6;
+                                }
+                                else
+                                {
+                                    data /= 43;
+                                };
+                                swap1[idx]  = data;
+                            };
+                        };
+                    }
+                    else if (chan == 1)
+                    {
+                        INT  data  = 0;
+                        for (idx = 0; idx < SPECSCOPEWIDTH; idx++)
+                        {
+                            if (freqAccum[idx] >= channels[1][idx])
+                                channels[1][idx] = freqAccum[idx];
+                            else
+                            {
+                                channels[1][idx] -= 128;
+                                if (channels[1][idx] < 0)
+                                    channels[1][idx] = 0;
+                            };
+//
+                            if (channels[1][idx] == 0 || channels[1][idx] <= 16)
+                            {
+                                swap2[idx]   = 0;
+                            }
+                            else
+                            {
+                                data = channels[1][idx] / 16;
+                                if (data >= 256)
+                                {
+                                    data = 6;
+                                }
+                                else
+                                {
+                                    data /= 43;
+                                };
+                            };
+                            swap2[idx] = data;
+                        };
+                    };
+                    if (swap1[0] == 0 && swap1[1] == 0 && swap1[2] == 0)
+                        swap1[0] = swap1[1] = swap1[2] = 1;
+                    for (idx = 0; idx < 3; idx++)
+                    {
+#if _DEBUG_ENABLE
+                         printf("[%d] %d, %d\t", idx, swap1[idx], channels[0][idx]);
+#endif
+                         limit[idx] = swap1[idx];
+                    };
+#if _DEBUG_ENABLE
+                    printf("\tR ==> ");
+#endif
+                    if (swap2[0] == 0 && swap2[1] == 0 && swap2[2] == 0)
+                        swap2[0] = swap2[1] = swap2[2] = 1;
+                    for (idx = 0; idx < 3; idx++)
+                    {
+#if _DEBUG_ENABLE
+                         printf("[%d] %d, %d\t", idx, swap2[2-idx], channels[1][2-idx]);
+#endif
+                         limit[idx+3] = swap1[2-idx];
+                    };
+#if _DEBUG_ENABLE
+                    printf("\n");
+#endif
+                    if (chan == 1)
+                    {
+                        HidRgbKeyboard(limit);
+                    };
+                };
+            };
+            hr = pCaptureClient->ReleaseBuffer(numFramesAvailable);
+            EXIT_ON_ERROR(hr)
+//
+            hr = pCaptureClient->GetNextPacketSize(&packetLength);
+            EXIT_ON_ERROR(hr)
+        };
+    };
+//
+    hr = pAudioClient->Stop();
+    EXIT_ON_ERROR(hr)
+//
+ExitStealAudio:
+    CoTaskMemFree(pwfx);
+    SAFE_RELEASE(pEnumerator)
+    SAFE_RELEASE(pDevice)
+    SAFE_RELEASE(pAudioClient)
+    SAFE_RELEASE(pCaptureClient)
+//
+    CoUninitialize();
+#if _DEBUG_ENABLE
+    printf("\nLeave StealAudioStream.\n");
+#endif
+//
+    return hr;
+};
+//
+LRESULT CALLBACK CallWndProc(_In_ int    nCode,
+                             _In_ WPARAM wParam,
+                             _In_ LPARAM lParam)
+{
+     PCWPSTRUCT msg = (PCWPSTRUCT)lParam;
+//
+    if (nCode == HC_ACTION)
+    {
+        if (msg->message == WM_DEVICECHANGE)
+        {
+            switch(msg->wParam)
+            {
+                case DBT_DEVICEARRIVAL:
+                case DBT_DEVICEREMOVECOMPLETE:
+                case DBT_DEVNODES_CHANGED:
+                {
+                    _nDevCount = 0;
+                    SetTimer((HWND)GetModuleHandle(0), 1001, 300, DevChangeTimerProc);
+                    _fTimer = TRUE;
+                };
+                break;
+            };
+        };
+    };
+    return CallNextHookEx(_hHook, nCode, wParam, lParam);    
+};
+//
+extern "C"
+__declspec(dllexport)
+BOOL WINAPI
+StartMonitorAudio(CONST SHORT fDebugEnable)
+{
+    UCHAR high, low;
+//
+//    if (RGBKeybdInitialize(&high, &low) == TRUE)
+    {
+        if (fDebugEnable)
+            _DEBUG_ENABLE = TRUE;
+        else
+            _DEBUG_ENABLE = FALSE;
+        _DEBUG_ENABLE = TRUE;
+        if (_DEBUG_ENABLE)
+        {
+            ::AllocConsole();
+            FILE *tempOut;
+            FILE *tempIn;
+            ::freopen_s(&tempOut, "CONOUT$", "w+t", stdout);
+            ::freopen_s(&tempIn, "CONIN$","r+t",stdin);
+        };
+        HANDLE thread = ::CreateThread(NULL, 0, AudioThreadProc, NULL, 0, NULL);
+        if (thread)
+        {
+           _fUsedHID = TRUE;
+           _fIsStop = FALSE;
+           ::CloseHandle(thread);
+           _hHook = SetWindowsHookEx(WH_CALLWNDPROC, CallWndProc, _hInstance, 0);
+           return TRUE;
+        };
+    };
+    return FALSE;
+};
+//
+extern "C"
+__declspec(dllexport)
+VOID WINAPI StopMonitorAudio(VOID)
+{
+    _fIsStop = TRUE;
+    FreeResource();
+    if (_hHook != NULL)
+        UnhookWindowsHookEx(_hHook);
+//
+#if 0
+    if (_pFFTrans != NULL)
+    {
+        delete _pFFTrans;
+        _pFFTrans = NULL;
+    };
+//
+    if (_pFFTransStereo != NULL)
+    {
+        delete _pFFTransStereo;
+        _pFFTransStereo = NULL;
+    };
+//
+    if (_pSampleIter != NULL)
+    {
+        delete _pSampleIter;
+        _pSampleIter = NULL;
+    };
+#endif
+    DisableLedKeybd();
+    if (_hKeybdDevice != INVALID_HANDLE_VALUE)
+        CloseHandle(_hKeybdDevice);
+    _hKeybdDevice = INVALID_HANDLE_VALUE;
+    
+};
+//
+extern "C"
+BOOL WINAPI DllMain(_In_ HINSTANCE hinstDLL,
+                    _In_ DWORD     fdwReason,
+                    _In_ LPVOID    lpvReserved)
+{
+    switch( fdwReason ) 
+    { 
+        case DLL_PROCESS_ATTACH:
+        case DLL_THREAD_ATTACH:
+            _hInstance = hinstDLL;
+        break;
+    };
+    return TRUE;
+};

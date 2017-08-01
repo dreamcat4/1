@@ -1,0 +1,276 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="d:\program files (x86)\microsoft visual studio 14.0\team tools\static analysis tools\fxcop\Xml\CodeAnalysisReport.xsl"?>
+<FxCopReport Version="14.0">
+ <Targets>
+  <Target Name="D:\MyColor2\MyColor2_20170613_Add_Welcome_Mode\DefaultColor\bin\Debug\DefaultColor.exe">
+   <Modules>
+    <Module Name="defaultcolor.exe">
+     <Namespaces>
+      <Namespace Name="DefaultColor">
+       <Types>
+        <Type Name="NativeMethod" Kind="Class" Accessibility="Assembly" ExternallyVisible="False">
+         <Members>
+          <Member Name="#CallNextHookEx(System.Int32,System.Int32,System.Int32,System.IntPtr)" Kind="Method" Static="True" Accessibility="Public" ExternallyVisible="False">
+           <Messages>
+            <Message TypeName="MovePInvokesToNativeMethodsClass" Category="Microsoft.Design" CheckId="CA1060" Status="Active" Created="2017-06-14 02:09:45Z" FixCategory="Breaking">
+             <Issue Certainty="95" Level="CriticalWarning">由於 'NativeMethod.CallNextHookEx(int, int, int, IntPtr)' 是 P/Invoke 方法，因此它應該在名為 NativeMethods、SafeNativeMethods 或 UnsafeNativeMethods 的類別中定義。</Issue>
+            </Message>
+            <Message Id="0" TypeName="PInvokeDeclarationsShouldBePortable" Category="Microsoft.Portability" CheckId="CA1901" Status="Active" Created="2017-06-14 02:09:45Z" FixCategory="NonBreaking">
+             <Issue Name="Parameter" Certainty="95" Level="Error">因為這是宣告在您的程式碼中，所以 P/Invoke 'NativeMethod.CallNextHookEx(int, int, int, IntPtr)' 的參數 'idHook' 在 64 位元 平台上將會是 4 個位元組寬。但這是錯誤的，依據這個應用程式開發介面的實際原生宣告所指出，該參數在 64 位元 平台上應該是 8 個位元組寬。請參閱 MSDN Platform SDK 文件中的說明，來決定應使用何種資料類型來取代 'int'。</Issue>
+            </Message>
+            <Message Id="2" TypeName="PInvokeDeclarationsShouldBePortable" Category="Microsoft.Portability" CheckId="CA1901" Status="Active" Created="2017-06-14 02:09:45Z" FixCategory="NonBreaking">
+             <Issue Name="Parameter" Certainty="95" Level="Error">因為這是宣告在您的程式碼中，所以 P/Invoke 'NativeMethod.CallNextHookEx(int, int, int, IntPtr)' 的參數 'wParam' 在 64 位元 平台上將會是 4 個位元組寬。但這是錯誤的，依據這個應用程式開發介面的實際原生宣告所指出，該參數在 64 位元 平台上應該是 8 個位元組寬。請參閱 MSDN Platform SDK 文件中的說明，來決定應使用何種資料類型來取代 'int'。</Issue>
+            </Message>
+            <Message Id="return" TypeName="PInvokeDeclarationsShouldBePortable" Category="Microsoft.Portability" CheckId="CA1901" Status="Active" Created="2017-06-14 02:09:45Z" FixCategory="NonBreaking">
+             <Issue Name="Return" Certainty="95" Level="Error">因為這是宣告在您的程式碼中，所以 P/Invoke 'NativeMethod.CallNextHookEx(int, int, int, IntPtr)' 的傳回類型在 64 位元 平台上將會是 4 個位元組寬。但這是錯誤的，依據這個應用程式開發介面的實際原生宣告所指出，該傳回類型在 64 位元 平台上應該是 8 個位元組寬。請參閱 MSDN Platform SDK 文件中的說明，來決定應使用何種資料類型來取代 'int'。</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#FindWindow(System.String,System.String)" Kind="Method" Static="True" Accessibility="Public" ExternallyVisible="False">
+           <Messages>
+            <Message TypeName="MovePInvokesToNativeMethodsClass" Category="Microsoft.Design" CheckId="CA1060" Status="Active" Created="2017-06-14 02:09:45Z" FixCategory="Breaking">
+             <Issue Certainty="95" Level="CriticalWarning">由於 'NativeMethod.FindWindow(string, string)' 是 P/Invoke 方法，因此它應該在名為 NativeMethods、SafeNativeMethods 或 UnsafeNativeMethods 的類別中定義。</Issue>
+            </Message>
+            <Message Id="0" TypeName="SpecifyMarshalingForPInvokeStringArguments" Category="Microsoft.Globalization" CheckId="CA2101" Status="Active" Created="2017-06-14 02:09:45Z" FixCategory="NonBreaking">
+             <Issue Name="ParameterImplicitAnsi" Certainty="75" Level="Error">為了降低安全性風險，請將參數 'lpClassName' 封送處理為 Unicode，其方法為將 DllImport.CharSet 設為 CharSet.Unicode，或是將該參數明確封送處理為 UnmanagedType.LPWStr。如果您需要將此字串封送處理為 ANSI 或依系統而定，可以明確指定 MarshalAs，以及設定 BestFitMapping=false; 此外為增加安全性，也可以設定 ThrowOnUnmappableChar=true。</Issue>
+            </Message>
+            <Message Id="1" TypeName="SpecifyMarshalingForPInvokeStringArguments" Category="Microsoft.Globalization" CheckId="CA2101" Status="Active" Created="2017-06-14 02:09:45Z" FixCategory="NonBreaking">
+             <Issue Name="ParameterImplicitAnsi" Certainty="75" Level="Error">為了降低安全性風險，請將參數 'lpWindowName' 封送處理為 Unicode，其方法為將 DllImport.CharSet 設為 CharSet.Unicode，或是將該參數明確封送處理為 UnmanagedType.LPWStr。如果您需要將此字串封送處理為 ANSI 或依系統而定，可以明確指定 MarshalAs，以及設定 BestFitMapping=false; 此外為增加安全性，也可以設定 ThrowOnUnmappableChar=true。</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#FreeLibrary(System.IntPtr)" Kind="Method" Static="True" Accessibility="Public" ExternallyVisible="False">
+           <Messages>
+            <Message TypeName="MovePInvokesToNativeMethodsClass" Category="Microsoft.Design" CheckId="CA1060" Status="Active" Created="2017-06-14 02:09:45Z" FixCategory="Breaking">
+             <Issue Certainty="95" Level="CriticalWarning">由於 'NativeMethod.FreeLibrary(IntPtr)' 是 P/Invoke 方法，因此它應該在名為 NativeMethods、SafeNativeMethods 或 UnsafeNativeMethods 的類別中定義。</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#GetProcAddress(System.IntPtr,System.String)" Kind="Method" Static="True" Accessibility="Public" ExternallyVisible="False">
+           <Messages>
+            <Message TypeName="MovePInvokesToNativeMethodsClass" Category="Microsoft.Design" CheckId="CA1060" Status="Active" Created="2017-06-14 02:09:45Z" FixCategory="Breaking">
+             <Issue Certainty="95" Level="CriticalWarning">由於 'NativeMethod.GetProcAddress(IntPtr, string)' 是 P/Invoke 方法，因此它應該在名為 NativeMethods、SafeNativeMethods 或 UnsafeNativeMethods 的類別中定義。</Issue>
+            </Message>
+            <Message Id="1" TypeName="SpecifyMarshalingForPInvokeStringArguments" Category="Microsoft.Globalization" CheckId="CA2101" Status="Active" Created="2017-06-14 02:09:45Z" FixCategory="NonBreaking">
+             <Issue Name="ParameterImplicitAnsi" Certainty="75" Level="Error">為了降低安全性風險，請將參數 'procedureName' 封送處理為 Unicode，其方法為將 DllImport.CharSet 設為 CharSet.Unicode，或是將該參數明確封送處理為 UnmanagedType.LPWStr。如果您需要將此字串封送處理為 ANSI 或依系統而定，可以明確指定 MarshalAs，以及設定 BestFitMapping=false; 此外為增加安全性，也可以設定 ThrowOnUnmappableChar=true。</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#GRGBDLL_Capture4ZONEBuffer(DefaultColor.FOURZONE_DLLBUFFER&amp;)" Kind="Method" Static="True" Accessibility="Public" ExternallyVisible="False">
+           <Messages>
+            <Message TypeName="MovePInvokesToNativeMethodsClass" Category="Microsoft.Design" CheckId="CA1060" Status="Active" Created="2017-06-14 02:09:45Z" FixCategory="Breaking">
+             <Issue Certainty="95" Level="CriticalWarning">由於 'NativeMethod.GRGBDLL_Capture4ZONEBuffer(ref FOURZONE_DLLBUFFER)' 是 P/Invoke 方法，因此它應該在名為 NativeMethods、SafeNativeMethods 或 UnsafeNativeMethods 的類別中定義。</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#GRGBDLL_CaptureCMDBuffer(DefaultColor.DLLBuffer&amp;)" Kind="Method" Static="True" Accessibility="Public" ExternallyVisible="False">
+           <Messages>
+            <Message TypeName="MovePInvokesToNativeMethodsClass" Category="Microsoft.Design" CheckId="CA1060" Status="Active" Created="2017-06-14 02:09:45Z" FixCategory="Breaking">
+             <Issue Certainty="95" Level="CriticalWarning">由於 'NativeMethod.GRGBDLL_CaptureCMDBuffer(ref DLLBuffer)' 是 P/Invoke 方法，因此它應該在名為 NativeMethods、SafeNativeMethods 或 UnsafeNativeMethods 的類別中定義。</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#GRGBDLL_DestroyDLL()" Kind="Method" Static="True" Accessibility="Public" ExternallyVisible="False">
+           <Messages>
+            <Message TypeName="MovePInvokesToNativeMethodsClass" Category="Microsoft.Design" CheckId="CA1060" Status="Active" Created="2017-06-14 02:09:45Z" FixCategory="Breaking">
+             <Issue Certainty="95" Level="CriticalWarning">由於 'NativeMethod.GRGBDLL_DestroyDLL()' 是 P/Invoke 方法，因此它應該在名為 NativeMethods、SafeNativeMethods 或 UnsafeNativeMethods 的類別中定義。</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#GRGBDLL_GetBacklight()" Kind="Method" Static="True" Accessibility="Public" ExternallyVisible="False">
+           <Messages>
+            <Message TypeName="MovePInvokesToNativeMethodsClass" Category="Microsoft.Design" CheckId="CA1060" Status="Active" Created="2017-06-14 02:09:45Z" FixCategory="Breaking">
+             <Issue Certainty="95" Level="CriticalWarning">由於 'NativeMethod.GRGBDLL_GetBacklight()' 是 P/Invoke 方法，因此它應該在名為 NativeMethods、SafeNativeMethods 或 UnsafeNativeMethods 的類別中定義。</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#GRGBDLL_GetMEKBTYPE()" Kind="Method" Static="True" Accessibility="Public" ExternallyVisible="False">
+           <Messages>
+            <Message TypeName="MovePInvokesToNativeMethodsClass" Category="Microsoft.Design" CheckId="CA1060" Status="Active" Created="2017-06-14 02:09:45Z" FixCategory="Breaking">
+             <Issue Certainty="95" Level="CriticalWarning">由於 'NativeMethod.GRGBDLL_GetMEKBTYPE()' 是 P/Invoke 方法，因此它應該在名為 NativeMethods、SafeNativeMethods 或 UnsafeNativeMethods 的類別中定義。</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#GRGBDLL_InitialDLL()" Kind="Method" Static="True" Accessibility="Public" ExternallyVisible="False">
+           <Messages>
+            <Message TypeName="MovePInvokesToNativeMethodsClass" Category="Microsoft.Design" CheckId="CA1060" Status="Active" Created="2017-06-14 02:09:45Z" FixCategory="Breaking">
+             <Issue Certainty="95" Level="CriticalWarning">由於 'NativeMethod.GRGBDLL_InitialDLL()' 是 P/Invoke 方法，因此它應該在名為 NativeMethods、SafeNativeMethods 或 UnsafeNativeMethods 的類別中定義。</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#GRGBDLL_iSetWelColor_14H(DefaultColor.NativeKBRGB[])" Kind="Method" Static="True" Accessibility="Public" ExternallyVisible="False">
+           <Messages>
+            <Message TypeName="MovePInvokesToNativeMethodsClass" Category="Microsoft.Design" CheckId="CA1060" Status="Active" Created="2017-06-14 02:09:45Z" FixCategory="Breaking">
+             <Issue Certainty="95" Level="CriticalWarning">由於 'NativeMethod.GRGBDLL_iSetWelColor_14H(NativeKBRGB[])' 是 P/Invoke 方法，因此它應該在名為 NativeMethods、SafeNativeMethods 或 UnsafeNativeMethods 的類別中定義。</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#GRGBDLL_SwitchLight(System.Boolean,DefaultColor.DLLBuffer&amp;)" Kind="Method" Static="True" Accessibility="Public" ExternallyVisible="False">
+           <Messages>
+            <Message TypeName="MovePInvokesToNativeMethodsClass" Category="Microsoft.Design" CheckId="CA1060" Status="Active" Created="2017-06-14 02:09:45Z" FixCategory="Breaking">
+             <Issue Certainty="95" Level="CriticalWarning">由於 'NativeMethod.GRGBDLL_SwitchLight(bool, ref DLLBuffer)' 是 P/Invoke 方法，因此它應該在名為 NativeMethods、SafeNativeMethods 或 UnsafeNativeMethods 的類別中定義。</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#GRGBDLL_SwitchLight_4Z(System.Boolean,DefaultColor.FOURZONE_DLLBUFFER&amp;)" Kind="Method" Static="True" Accessibility="Public" ExternallyVisible="False">
+           <Messages>
+            <Message TypeName="MovePInvokesToNativeMethodsClass" Category="Microsoft.Design" CheckId="CA1060" Status="Active" Created="2017-06-14 02:09:45Z" FixCategory="Breaking">
+             <Issue Certainty="95" Level="CriticalWarning">由於 'NativeMethod.GRGBDLL_SwitchLight_4Z(bool, ref FOURZONE_DLLBUFFER)' 是 P/Invoke 方法，因此它應該在名為 NativeMethods、SafeNativeMethods 或 UnsafeNativeMethods 的類別中定義。</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#LoadLibrary(System.String)" Kind="Method" Static="True" Accessibility="Public" ExternallyVisible="False">
+           <Messages>
+            <Message TypeName="MovePInvokesToNativeMethodsClass" Category="Microsoft.Design" CheckId="CA1060" Status="Active" Created="2017-06-14 02:09:45Z" FixCategory="Breaking">
+             <Issue Certainty="95" Level="CriticalWarning">由於 'NativeMethod.LoadLibrary(string)' 是 P/Invoke 方法，因此它應該在名為 NativeMethods、SafeNativeMethods 或 UnsafeNativeMethods 的類別中定義。</Issue>
+            </Message>
+            <Message Id="0" TypeName="SpecifyMarshalingForPInvokeStringArguments" Category="Microsoft.Globalization" CheckId="CA2101" Status="Active" Created="2017-06-14 02:09:45Z" FixCategory="NonBreaking">
+             <Issue Name="ParameterImplicitAnsi" Certainty="75" Level="Error">為了降低安全性風險，請將參數 'dllToLoad' 封送處理為 Unicode，其方法為將 DllImport.CharSet 設為 CharSet.Unicode，或是將該參數明確封送處理為 UnmanagedType.LPWStr。如果您需要將此字串封送處理為 ANSI 或依系統而定，可以明確指定 MarshalAs，以及設定 BestFitMapping=false; 此外為增加安全性，也可以設定 ThrowOnUnmappableChar=true。</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#OemSvcHook(System.Int32,System.String[],System.IntPtr,System.Int32)" Kind="Method" Static="True" Accessibility="Public" ExternallyVisible="False">
+           <Messages>
+            <Message TypeName="MovePInvokesToNativeMethodsClass" Category="Microsoft.Design" CheckId="CA1060" Status="Active" Created="2017-06-14 02:09:45Z" FixCategory="Breaking">
+             <Issue Certainty="95" Level="CriticalWarning">由於 'NativeMethod.OemSvcHook(int, string[], IntPtr, int)' 是 P/Invoke 方法，因此它應該在名為 NativeMethods、SafeNativeMethods 或 UnsafeNativeMethods 的類別中定義。</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#PostMessage(System.IntPtr,System.UInt32,System.Int32,System.Int32)" Kind="Method" Static="True" Accessibility="Public" ExternallyVisible="False">
+           <Messages>
+            <Message TypeName="MovePInvokesToNativeMethodsClass" Category="Microsoft.Design" CheckId="CA1060" Status="Active" Created="2017-06-14 02:09:45Z" FixCategory="Breaking">
+             <Issue Certainty="95" Level="CriticalWarning">由於 'NativeMethod.PostMessage(IntPtr, uint, int, int)' 是 P/Invoke 方法，因此它應該在名為 NativeMethods、SafeNativeMethods 或 UnsafeNativeMethods 的類別中定義。</Issue>
+            </Message>
+            <Message Id="2" TypeName="PInvokeDeclarationsShouldBePortable" Category="Microsoft.Portability" CheckId="CA1901" Status="Active" Created="2017-06-14 02:09:45Z" FixCategory="NonBreaking">
+             <Issue Name="Parameter" Certainty="95" Level="Error">因為這是宣告在您的程式碼中，所以 P/Invoke 'NativeMethod.PostMessage(IntPtr, uint, int, int)' 的參數 'wParam' 在 64 位元 平台上將會是 4 個位元組寬。但這是錯誤的，依據這個應用程式開發介面的實際原生宣告所指出，該參數在 64 位元 平台上應該是 8 個位元組寬。請參閱 MSDN Platform SDK 文件中的說明，來決定應使用何種資料類型來取代 'int'。</Issue>
+            </Message>
+            <Message Id="3" TypeName="PInvokeDeclarationsShouldBePortable" Category="Microsoft.Portability" CheckId="CA1901" Status="Active" Created="2017-06-14 02:09:45Z" FixCategory="NonBreaking">
+             <Issue Name="Parameter" Certainty="95" Level="Error">因為這是宣告在您的程式碼中，所以 P/Invoke 'NativeMethod.PostMessage(IntPtr, uint, int, int)' 的參數 'lParam' 在 64 位元 平台上將會是 4 個位元組寬。但這是錯誤的，依據這個應用程式開發介面的實際原生宣告所指出，該參數在 64 位元 平台上應該是 8 個位元組寬。請參閱 MSDN Platform SDK 文件中的說明，來決定應使用何種資料類型來取代 'int'。</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#RegisterPowerSettingNotification(System.IntPtr,System.Guid&amp;,System.Int32)" Kind="Method" Static="True" Accessibility="Public" ExternallyVisible="False">
+           <Messages>
+            <Message TypeName="MovePInvokesToNativeMethodsClass" Category="Microsoft.Design" CheckId="CA1060" Status="Active" Created="2017-06-14 02:09:45Z" FixCategory="Breaking">
+             <Issue Certainty="95" Level="CriticalWarning">由於 'NativeMethod.RegisterPowerSettingNotification(IntPtr, ref Guid, int)' 是 P/Invoke 方法，因此它應該在名為 NativeMethods、SafeNativeMethods 或 UnsafeNativeMethods 的類別中定義。</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#RegisterWindowMessage(System.String)" Kind="Method" Static="True" Accessibility="Private" ExternallyVisible="False">
+           <Messages>
+            <Message TypeName="MovePInvokesToNativeMethodsClass" Category="Microsoft.Design" CheckId="CA1060" Status="Active" Created="2017-06-14 02:09:45Z" FixCategory="Breaking">
+             <Issue Certainty="95" Level="CriticalWarning">由於 'NativeMethod.RegisterWindowMessage(string)' 是 P/Invoke 方法，因此它應該在名為 NativeMethods、SafeNativeMethods 或 UnsafeNativeMethods 的類別中定義。</Issue>
+            </Message>
+            <Message Id="0" TypeName="SpecifyMarshalingForPInvokeStringArguments" Category="Microsoft.Globalization" CheckId="CA2101" Status="Active" Created="2017-06-14 02:09:45Z" FixCategory="NonBreaking">
+             <Issue Name="Parameter" Certainty="75" Level="Error">為了降低安全性風險，請將參數 'lpString' 封送處理為 Unicode，其方法為將 DllImport.CharSet 設為 CharSet.Unicode，或是將該參數明確封送處理為 UnmanagedType.LPWStr。如果您需要將此字串封送處理為 ANSI 或依系統而定，可以設定 BestFitMapping=false; 此外為增加安全性，也可以設定 ThrowOnUnmappableChar=true。</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#SendMessage(System.IntPtr,System.UInt32,System.Int32,System.Int32)" Kind="Method" Static="True" Accessibility="Public" ExternallyVisible="False">
+           <Messages>
+            <Message TypeName="MovePInvokesToNativeMethodsClass" Category="Microsoft.Design" CheckId="CA1060" Status="Active" Created="2017-06-14 02:09:45Z" FixCategory="Breaking">
+             <Issue Certainty="95" Level="CriticalWarning">由於 'NativeMethod.SendMessage(IntPtr, uint, int, int)' 是 P/Invoke 方法，因此它應該在名為 NativeMethods、SafeNativeMethods 或 UnsafeNativeMethods 的類別中定義。</Issue>
+            </Message>
+            <Message Id="2" TypeName="PInvokeDeclarationsShouldBePortable" Category="Microsoft.Portability" CheckId="CA1901" Status="Active" Created="2017-06-14 02:09:45Z" FixCategory="NonBreaking">
+             <Issue Name="Parameter" Certainty="95" Level="Error">因為這是宣告在您的程式碼中，所以 P/Invoke 'NativeMethod.SendMessage(IntPtr, uint, int, int)' 的參數 'wParam' 在 64 位元 平台上將會是 4 個位元組寬。但這是錯誤的，依據這個應用程式開發介面的實際原生宣告所指出，該參數在 64 位元 平台上應該是 8 個位元組寬。請參閱 MSDN Platform SDK 文件中的說明，來決定應使用何種資料類型來取代 'int'。</Issue>
+            </Message>
+            <Message Id="3" TypeName="PInvokeDeclarationsShouldBePortable" Category="Microsoft.Portability" CheckId="CA1901" Status="Active" Created="2017-06-14 02:09:45Z" FixCategory="NonBreaking">
+             <Issue Name="Parameter" Certainty="95" Level="Error">因為這是宣告在您的程式碼中，所以 P/Invoke 'NativeMethod.SendMessage(IntPtr, uint, int, int)' 的參數 'lParam' 在 64 位元 平台上將會是 4 個位元組寬。但這是錯誤的，依據這個應用程式開發介面的實際原生宣告所指出，該參數在 64 位元 平台上應該是 8 個位元組寬。請參閱 MSDN Platform SDK 文件中的說明，來決定應使用何種資料類型來取代 'int'。</Issue>
+            </Message>
+            <Message Id="return" TypeName="PInvokeDeclarationsShouldBePortable" Category="Microsoft.Portability" CheckId="CA1901" Status="Active" Created="2017-06-14 02:09:45Z" FixCategory="NonBreaking">
+             <Issue Name="Return" Certainty="95" Level="Error">因為這是宣告在您的程式碼中，所以 P/Invoke 'NativeMethod.SendMessage(IntPtr, uint, int, int)' 的傳回類型在 64 位元 平台上將會是 4 個位元組寬。但這是錯誤的，依據這個應用程式開發介面的實際原生宣告所指出，該傳回類型在 64 位元 平台上應該是 8 個位元組寬。請參閱 MSDN Platform SDK 文件中的說明，來決定應使用何種資料類型來取代 'int'。</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#SetWindowsHookEx(System.Int32,DefaultColor.NativeMethod+HookProc,System.IntPtr,System.Int32)" Kind="Method" Static="True" Accessibility="Public" ExternallyVisible="False">
+           <Messages>
+            <Message TypeName="MovePInvokesToNativeMethodsClass" Category="Microsoft.Design" CheckId="CA1060" Status="Active" Created="2017-06-14 02:09:45Z" FixCategory="Breaking">
+             <Issue Certainty="95" Level="CriticalWarning">由於 'NativeMethod.SetWindowsHookEx(int, NativeMethod.HookProc, IntPtr, int)' 是 P/Invoke 方法，因此它應該在名為 NativeMethods、SafeNativeMethods 或 UnsafeNativeMethods 的類別中定義。</Issue>
+            </Message>
+            <Message Id="return" TypeName="PInvokeDeclarationsShouldBePortable" Category="Microsoft.Portability" CheckId="CA1901" Status="Active" Created="2017-06-14 02:09:45Z" FixCategory="NonBreaking">
+             <Issue Name="Return" Certainty="95" Level="Error">因為這是宣告在您的程式碼中，所以 P/Invoke 'NativeMethod.SetWindowsHookEx(int, NativeMethod.HookProc, IntPtr, int)' 的傳回類型在 64 位元 平台上將會是 4 個位元組寬。但這是錯誤的，依據這個應用程式開發介面的實際原生宣告所指出，該傳回類型在 64 位元 平台上應該是 8 個位元組寬。請參閱 MSDN Platform SDK 文件中的說明，來決定應使用何種資料類型來取代 'int'。</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#UnhookWindowsHookEx(System.Int32)" Kind="Method" Static="True" Accessibility="Public" ExternallyVisible="False">
+           <Messages>
+            <Message TypeName="MovePInvokesToNativeMethodsClass" Category="Microsoft.Design" CheckId="CA1060" Status="Active" Created="2017-06-14 02:09:45Z" FixCategory="Breaking">
+             <Issue Certainty="95" Level="CriticalWarning">由於 'NativeMethod.UnhookWindowsHookEx(int)' 是 P/Invoke 方法，因此它應該在名為 NativeMethods、SafeNativeMethods 或 UnsafeNativeMethods 的類別中定義。</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#UnregisterPowerSettingNotification(System.IntPtr)" Kind="Method" Static="True" Accessibility="Public" ExternallyVisible="False">
+           <Messages>
+            <Message TypeName="MovePInvokesToNativeMethodsClass" Category="Microsoft.Design" CheckId="CA1060" Status="Active" Created="2017-06-14 02:09:45Z" FixCategory="Breaking">
+             <Issue Certainty="95" Level="CriticalWarning">由於 'NativeMethod.UnregisterPowerSettingNotification(IntPtr)' 是 P/Invoke 方法，因此它應該在名為 NativeMethods、SafeNativeMethods 或 UnsafeNativeMethods 的類別中定義。</Issue>
+            </Message>
+           </Messages>
+          </Member>
+         </Members>
+        </Type>
+       </Types>
+      </Namespace>
+     </Namespaces>
+    </Module>
+   </Modules>
+  </Target>
+ </Targets>
+ <Rules>
+  <Rule TypeName="MovePInvokesToNativeMethodsClass" Category="Microsoft.Design" CheckId="CA1060">
+   <Name>必須將 P/Invokes 移到 NativeMethods 類別</Name>
+   <Description>此類型包含擁有 DllImport 屬性的成員。擁有 DllImport 屬性的成員應該包含在名為 NativeMethods、SafeNativeMethods 或 UnsafeNativeMethods 的類別中。</Description>
+   <Resolution Name="Default">由於 {0} 是 P/Invoke 方法，因此它應該在名為 NativeMethods、SafeNativeMethods 或 UnsafeNativeMethods 的類別中定義。</Resolution>
+   <Owner />
+   <Url>http://msdn.microsoft.com/library/ms182161.aspx</Url>
+   <Email>[none]</Email>
+   <MessageLevel Certainty="95">CriticalWarning</MessageLevel>
+   <File Name="designrules.dll" Version="14.0.0.0" />
+  </Rule>
+  <Rule TypeName="PInvokeDeclarationsShouldBePortable" Category="Microsoft.Portability" CheckId="CA1901">
+   <Name>P/Invoke 宣告應該為可移植的</Name>
+   <Description>.</Description>
+   <Resolution Name="Parameter">因為這是宣告在您的程式碼中，所以 P/Invoke {1} 的參數 {0} 在 {3} 平台上將會是 {2} 個位元組寬。但這是錯誤的，依據這個應用程式開發介面的實際原生宣告所指出，該參數在 {3} 平台上應該是 {4} 個位元組寬。請參閱 MSDN Platform SDK 文件中的說明，來決定應使用何種資料類型來取代 {5}。</Resolution>
+   <Resolution Name="Return">因為這是宣告在您的程式碼中，所以 P/Invoke {0} 的傳回類型在 {2} 平台上將會是 {1} 個位元組寬。但這是錯誤的，依據這個應用程式開發介面的實際原生宣告所指出，該傳回類型在 {2} 平台上應該是 {3} 個位元組寬。請參閱 MSDN Platform SDK 文件中的說明，來決定應使用何種資料類型來取代 {4}。</Resolution>
+   <Owner />
+   <Url>http://msdn.microsoft.com/library/ms182284(VS.100).aspx</Url>
+   <Email>[none]</Email>
+   <MessageLevel Certainty="95">Error</MessageLevel>
+   <File Name="portabilityrules.dll" Version="14.0.0.0" />
+  </Rule>
+  <Rule TypeName="SpecifyMarshalingForPInvokeStringArguments" Category="Microsoft.Globalization" CheckId="CA2101">
+   <Name>必須指定 P/Invoke 字串引數的封送處理</Name>
+   <Description>在將字串封送處理為 ANSI 或 Auto (Win9x) 時，某些字元可能會受到變更。如果自動調整對應是開啟的，則會把顯示在 Unicode 中不同的字串封送處理為完全相同的 ANSI 字串，而這可能會導致錯誤的安全性決策。關閉自動調整對應即可降低此風險，因為無對應項的所有字元都會被對應到 '?'。另外請注意，CharSet.Ansi 是所有字串封送處理的預設設定; 至於 Unicode 封送處理則必須明確指定為 DllImport 或 StructLayout 的 CharSet 設定，或是為具有 Unicode (或依系統而定) UnmanagedType 的 MarshalAs 屬性。</Description>
+   <Resolution Name="Parameter">為了降低安全性風險，請將參數 {0} 封送處理為 Unicode，其方法為將 DllImport.CharSet 設為 CharSet.Unicode，或是將該參數明確封送處理為 UnmanagedType.LPWStr。如果您需要將此字串封送處理為 ANSI 或依系統而定，可以設定 BestFitMapping=false; 此外為增加安全性，也可以設定 ThrowOnUnmappableChar=true。</Resolution>
+   <Resolution Name="ParameterImplicitAnsi">為了降低安全性風險，請將參數 {0} 封送處理為 Unicode，其方法為將 DllImport.CharSet 設為 CharSet.Unicode，或是將該參數明確封送處理為 UnmanagedType.LPWStr。如果您需要將此字串封送處理為 ANSI 或依系統而定，可以明確指定 MarshalAs，以及設定 BestFitMapping=false; 此外為增加安全性，也可以設定 ThrowOnUnmappableChar=true。</Resolution>
+   <Owner />
+   <Url>http://msdn.microsoft.com/library/ms182319.aspx</Url>
+   <Email>[none]</Email>
+   <MessageLevel Certainty="75">Error</MessageLevel>
+   <File Name="globalizationrules.dll" Version="14.0.0.0" />
+  </Rule>
+ </Rules>
+ <Localized>
+  <String Key="Category">分類</String>
+  <String Key="Certainty">確實性</String>
+  <String Key="CollapseAll">全部摺疊</String>
+  <String Key="CheckId">檢查 ID</String>
+  <String Key="Error">錯誤</String>
+  <String Key="Errors">錯誤</String>
+  <String Key="ExpandAll">全部展開</String>
+  <String Key="Help">說明</String>
+  <String Key="Line">行</String>
+  <String Key="Messages">訊息</String>
+  <String Key="LocationNotStoredInPdb">[位置未儲存在 PDB]</String>
+  <String Key="Project">專案</String>
+  <String Key="Resolution">解析度</String>
+  <String Key="Rule">規則</String>
+  <String Key="RuleFile">規則檔</String>
+  <String Key="RuleDescription">規則描述</String>
+  <String Key="Source">來源</String>
+  <String Key="Status">狀態</String>
+  <String Key="Target">目標</String>
+  <String Key="Warning">警告</String>
+  <String Key="Warnings">警告</String>
+  <String Key="ReportTitle">程式碼分析報告</String>
+ </Localized>
+</FxCopReport>
